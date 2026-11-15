@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.JiankongyujingDao">
+
+    <sql id="Base_Column_List">
+        a.id as id
+        ,a.jiankongyujing_uuid_number as jiankongyujingUuidNumber
+        ,a.jiankongyujing_name as jiankongyujingName
+        ,a.jiankong_types as jiankongTypes
+        ,a.yujing_level_types as yujingLevelTypes
+        ,a.yujing_status_types as yujingStatusTypes
+        ,a.yujing_mode_types as yujingModeTypes
+        ,a.yujing_source as yujingSource
+        ,a.yonghu_id as yonghuId
+        ,a.shangpin_order_id as shangpinOrderId
+        ,a.jiankong_object as jiankongObject
+        ,a.jiankong_data as jiankongData
+        ,a.yujing_threshold as yujingThreshold
+        ,a.jiankong_time as jiankongTime
+        ,a.yujing_content as yujingContent
+        ,a.chuli_content as chuliContent
+        ,a.chuli_time as chuliTime
+        ,a.create_time as createTime
+        ,b.shangpin_order_uuid_number as shangpinOrderUuidNumber
+        ,c.yonghu_name as yonghuName
+    </sql>
+
+    <select id="selectListView" parameterType="map" resultType="com.entity.view.JiankongyujingView">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM jiankongyujing a
+        LEFT JOIN shangpin_order b ON a.shangpin_order_id = b.id
+        LEFT JOIN yonghu c ON a.yonghu_id = c.id
+        <where>
+            <if test="params.ids != null">
+                and a.id in
+                <foreach item="item" index="index" collection="params.ids" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="params.jiankongyujingUuidNumber != null and params.jiankongyujingUuidNumber != '' and params.jiankongyujingUuidNumber != 'null'">
+                and a.jiankongyujing_uuid_number like CONCAT('%', #{params.jiankongyujingUuidNumber}, '%')
+            </if>
+            <if test="params.jiankongyujingName != null and params.jiankongyujingName != '' and params.jiankongyujingName != 'null'">
+                and a.jiankongyujing_name like CONCAT('%', #{params.jiankongyujingName}, '%')
+            </if>
+            <if test="params.jiankongTypes != null and params.jiankongTypes != ''">
+                and a.jiankong_types = #{params.jiankongTypes}
+            </if>
+            <if test="params.yujingLevelTypes != null and params.yujingLevelTypes != ''">
+                and a.yujing_level_types = #{params.yujingLevelTypes}
+            </if>
+            <if test="params.yujingStatusTypes != null and params.yujingStatusTypes != ''">
+                and a.yujing_status_types = #{params.yujingStatusTypes}
+            </if>
+            <if test="params.yujingModeTypes != null and params.yujingModeTypes != ''">
+                and a.yujing_mode_types = #{params.yujingModeTypes}
+            </if>
+            <if test="params.yonghuId != null and params.yonghuId != ''">
+                and a.yonghu_id = #{params.yonghuId}
+            </if>
+            <if test="params.shangpinOrderId != null and params.shangpinOrderId != ''">
+                and a.shangpin_order_id = #{params.shangpinOrderId}
+            </if>
+            <if test="params.jiankongObject != null and params.jiankongObject != '' and params.jiankongObject != 'null'">
+                and a.jiankong_object like CONCAT('%', #{params.jiankongObject}, '%')
+            </if>
+            <if test="params.jiankongData != null and params.jiankongData != '' and params.jiankongData != 'null'">
+                and a.jiankong_data like CONCAT('%', #{params.jiankongData}, '%')
+            </if>
+            <if test="params.yujingThreshold != null and params.yujingThreshold != '' and params.yujingThreshold != 'null'">
+                and a.yujing_threshold like CONCAT('%', #{params.yujingThreshold}, '%')
+            </if>
+            <if test="params.yujingSource != null and params.yujingSource != '' and params.yujingSource != 'null'">
+                and a.yujing_source like CONCAT('%', #{params.yujingSource}, '%')
+            </if>
+        </where>
+        order by a.${params.sort} ${params.order}
+    </select>
+</mapper>

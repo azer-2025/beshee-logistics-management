@@ -1,0 +1,147 @@
+// 后台管理系统 - 终极视觉规范 (V6.0)
+:root {
+  --admin-primary: #3b82f6;
+  --admin-success: #10b981;
+  --admin-danger: #ef4444;
+  --admin-warning: #f59e0b;
+  --admin-info: #64748b;
+  --panel-bg: #ffffff;
+  --input-bg: #f8fafc;
+  --text-main: #1e293b;
+  --text-label: #475569;
+}
+
+// ==========================================
+// 1. 全局按钮重塑 (彻底粉碎原本的所有丑陋逻辑)
+// ==========================================
+body .main-content {
+  .el-button {
+    border-style: solid !important;
+    border-width: 0 !important;
+    border-radius: 10px !important; // 大圆角
+    height: 40px !important; // 统一高度
+    min-width: 100px !important; // 统一宽度
+    padding: 0 20px !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 8px !important; // 强制按钮间距
+
+    &:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+      filter: brightness(1.1) !important;
+    }
+
+    &:active { transform: translateY(0) !important; }
+
+    &.el-button--primary, &.btn-success { background: var(--admin-primary) !important; color: #fff !important; }
+    &.el-button--success { background: var(--admin-success) !important; color: #fff !important; }
+    &.el-button--danger { background: var(--admin-danger) !important; color: #fff !important; }
+    &.el-button--warning { background: var(--admin-warning) !important; color: #fff !important; }
+    
+    // 针对“取消/返回”按钮
+    &.btn-close, &.el-button--info {
+      background: #f1f5f9 !important;
+      color: #64748b !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: none !important;
+      &:hover { background: #e2e8f0 !important; color: #1e293b !important; }
+    }
+  }
+
+  // 特别修复：表单底部的按钮容器
+  .el-form-item.btn {
+    margin-top: 40px !important;
+    padding-top: 30px !important;
+    border-top: 1px solid #f1f5f9 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important; // 强制居中
+    
+    :deep(.el-form-item__content) {
+      margin-left: 0 !important;
+      display: flex !important;
+      justify-content: center !important;
+      width: 100% !important;
+    }
+  }
+}
+
+// ==========================================
+// 2. 搜索表单容器 (form-content)
+// ==========================================
+.form-content {
+  background: var(--panel-bg) !important;
+  padding: 30px !important;
+  border-radius: 20px !important;
+  margin-bottom: 24px !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04) !important;
+  border: none !important;
+
+  .slt {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 15px 24px !important;
+    margin-bottom: 15px !important;
+
+    .el-form-item {
+      margin: 0 !important;
+      .el-form-item__label {
+        font-weight: 700 !important;
+        color: var(--text-label) !important;
+        font-size: 14px !important;
+      }
+      .el-input, .el-select, .el-date-editor { width: 220px !important; }
+    }
+  }
+
+  .ad {
+    margin-top: 20px !important;
+    padding-top: 24px !important;
+    border-top: 1px dashed #e2e8f0 !important;
+    display: flex !important;
+    gap: 12px !important;
+  }
+}
+
+// ==========================================
+// 3. 详情/编辑容器美化
+// ==========================================
+.addEdit-block {
+  padding: 0 !important;
+  background: transparent !important;
+  
+  .detail-form-content {
+    background: #fff !important;
+    padding: 40px !important;
+    border-radius: 24px !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05) !important;
+  }
+}
+
+// ==========================================
+// 4. 全局控件微调
+// ==========================================
+.el-input__wrapper, .el-select__wrapper {
+  background-color: var(--input-bg) !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: none !important;
+  border-radius: 10px !important;
+  height: 40px !important;
+  &:hover { border-color: var(--admin-primary) !important; }
+  &.is-focus { border-color: var(--admin-primary) !important; background: #fff !important; }
+}
+
+.table-content {
+  background: var(--panel-bg) !important;
+  padding: 30px !important;
+  border-radius: 24px !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04) !important;
+}
